@@ -1,66 +1,65 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import csv
-'''
-Red underlines? Install the required packages first: 
-Open the Terminal in PyCharm (bottom left). 
 
-On Windows type:
-python -m pip install -r requirements.txt
-
-On MacOS type:
-pip3 install -r requirements.txt
-
-This will install the packages from requirements.txt for this project.
-'''
-
-class bookform(FlaskForm):
-    name = StringField('book name', validators=[DataRequired()])
-    author = StringField('author name',validators=[DataRequired()])
-    rating = StringField('rating',validators=[DataRequired()])
-
-    submit = SubmitField("submit")
-
+class BookForm(FlaskForm):
+    name = StringField('Book Name', validators=[DataRequired()])
+    author = StringField('Author Name', validators=[DataRequired()])
+    rating = StringField('Rating', validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'pooja_Saini'  # Secret key required for Flask-WTF
 
-all_books = []
-
 Bootstrap5(app)
+
 @app.route('/')
 def home():
     books = []
-    # Read the CSV file and get all book entries
     try:
-        with open("book.csv", mode="r", encoding='utf-8') as csv_file:
+        with open("books/book.csv", mode="r", encoding='utf-8') as csv_file:
             reader = csv.reader(csv_file)
             for row in reader:
                 books.append(row)
     except FileNotFoundError:
-        pass 
-    return render_template("index.html",books = books)
+        pass
+    return render_template("index.html", books=books)
 
 
-
-@app.route("/add",methods=["GET","POST"])
+@app.route("/add", methods=["GET", "POST"])
 def add():
-    form = bookform()
+    form = BookForm()
     if form.validate_on_submit():
+        with open("books/book.csv", mode="a", encoding='utf-8', newline='') as csv_file:
+            writer = csv.writer(csv_file)
+            writer.writerow([form.name.data, form.author.data, form.rating.data])  # Write a new row
+        return redirect(url_for("home"))
+    return render_template("add.html", form=form)
 
-        with open("book.csv", mode="a", encoding='utf-8') as csv_file:
-            csv_file.write(f"\n{form.name.data},"
-                    f"{form.author.data},"
-                    f"{form.rating.data},")
-        return redirect(url_for("home"))    
-                       
 
-    return render_template("add.html",form=form)
+@app.route("/delete/<int:book_id>")
+def delete(book_id):
+    books = []
+    try:
+        with open("books/book.csv", mode="r", encoding='utf-8') as csv_file:
+            reader = csv.reader(csv_file)
+            books = list(reader)  # Read all books into a list
+    except FileNotFoundError:
+        pass
 
+    # Remove the selected book based on its index
+    if 0 <= book_id < len(books):
+        books.pop(book_id)
+
+    # Write the updated list back to the CSV file without adding extra newlines
+    with open("books/book.csv", mode="w", encoding='utf-8', newline='') as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerows(books)  # Write the remaining books back to the file
+
+    return redirect(url_for("home"))
 
 if __name__ == "__main__":
     app.run(debug=True)
-
