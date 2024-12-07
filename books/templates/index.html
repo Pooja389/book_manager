@@ -12,6 +12,8 @@
       {% for book in books %}
         <li>
           <strong>{{ book[0] }}</strong> by {{ book[1] }} - Rating: {{ book[2] }}
+          <a href="{{ url_for('delete', book_id=loop.index0) }}">Delete</a>
+
         </li>
       {% endfor %}
     </ul>
