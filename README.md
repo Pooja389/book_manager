@@ -42,7 +42,7 @@ Before running the application, ensure that you have the necessary packages inst
 **setup**   
 1. clone the repository
    ```bash
-   git clone https://github.com/Pooja389/book_manger.git
+   git clone https://github.com/Pooja389/book_manager.git
    ```
 2. Navigate into your project directory
    ```bash
