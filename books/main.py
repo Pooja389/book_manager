@@ -20,7 +20,7 @@ Bootstrap5(app)
 def home():
     books = []
     try:
-        with open("book.csv", mode="r", encoding='utf-8') as csv_file:
+        with open(""book_manager/books/book.csv", mode="r", encoding='utf-8') as csv_file:
             reader = csv.reader(csv_file)
             for row in reader:
                 books.append(row)
@@ -33,7 +33,7 @@ def home():
 def add():
     form = BookForm()
     if form.validate_on_submit():
-        with open("book.csv", mode="a", encoding='utf-8', newline='') as csv_file:
+        with open(""book_manager/books/book.csv", mode="a", encoding='utf-8', newline='') as csv_file:
             writer = csv.writer(csv_file)
             writer.writerow([form.name.data, form.author.data, form.rating.data])  # Write a new row
         return redirect(url_for("home"))
@@ -44,7 +44,7 @@ def add():
 def delete(book_id):
     books = []
     try:
-        with open("book.csv", mode="r", encoding='utf-8') as csv_file:
+        with open(""book_manager/books/book.csv", mode="r", encoding='utf-8') as csv_file:
             reader = csv.reader(csv_file)
             books = list(reader)  # Read all books into a list
     except FileNotFoundError:
@@ -55,7 +55,7 @@ def delete(book_id):
         books.pop(book_id)
 
     # Write the updated list back to the CSV file without adding extra newlines
-    with open("books/book.csv", mode="w", encoding='utf-8', newline='') as csv_file:
+    with open(""book_manager/books/book.csv", mode="w", encoding='utf-8', newline='') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerows(books)  # Write the remaining books back to the file
 
