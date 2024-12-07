@@ -44,7 +44,7 @@ def add():
 def delete(book_id):
     books = []
     try:
-        with open(""book_manager/books/book.csv", mode="r", encoding='utf-8') as csv_file:
+        with open("book_manager/books/book.csv", mode="r", encoding='utf-8') as csv_file:
             reader = csv.reader(csv_file)
             books = list(reader)  # Read all books into a list
     except FileNotFoundError:
