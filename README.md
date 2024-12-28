@@ -13,6 +13,15 @@ This is a simple Flask web application that allows users to add books with their
 
 Before running the application, ensure that you have the necessary packages installed.
 
+**setup**   
+1. clone the repository
+   ```bash
+   git clone https://github.com/Pooja389/book_manager.git
+   ```
+2. Navigate into your project directory
+   ```bash
+   cd book_manager
+   ```
 ### Install Dependencies
 
 1. Create a virtual environment (optional but recommended):
@@ -39,15 +48,9 @@ Before running the application, ensure that you have the necessary packages inst
    ```bash
    pip install -r requirements.txt
    ```
-**setup**   
-1. clone the repository
+## run it
+1. Run the application
    ```bash
-   git clone https://github.com/Pooja389/book_manager.git
-   ```
-2. Navigate into your project directory
-   ```bash
-   cd book_manager
-   ```
-3. Run the application
-   ```bash
-   python main.py      
+   python main.py
+   ```  
+2. press ctrl +click on http://127.0.0.1:5000 in terminal
