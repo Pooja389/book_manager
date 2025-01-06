@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Hyperspace by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="static/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="static/assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						
+						<h3>1. Click on "Add New Book" to add a new book to your app</h3>
+						<br>
+						<h3>2. Click on "Delete" to delete the added book from your app</h3>
+						
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>MY BOOKS</h1>
+							
+							<p> <a href="http://html5up.net"></a><br />
+								{% if books %}
+							<div class="content">
+								<div class="inner">
+									{% for book in books %}
+									<h2 class="book-title">
+										<span class="book-name">{{ book[0] }}-by</span>  
+										<span class="book-author"> {{ book[1] }}</span> - 
+										<span class="book-rating">Rating: {{ book[2] }}/10</span>
+									</h2>
+									
+									<p><a href="{{ url_for('delete', book_id=loop.index0) }}"class="delete-btn">Delete</a></p>
+									{% endfor %}
+									<ul class="actions">
+							{% else %}
+								<p>No books available.</p>
+							{% endif %}
+							<a href="http://html5up.net/license"></a>.</p>
+							
+
+							<h3><a href="{{url_for('add')}}"class="add-book-link">Add New Book</a></h3>
+							
+						</div>
+					</section>
+
+				<!-- One -->
+					
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li><a href="https://www.linkedin.com/in/pooja-saini-5b0684289/" class="icon brands fa-linkedin"><span class="label">Linkdin</span></a></li>
+						<li><a href="https://github.com/Pooja389" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="mailto:p1219513@@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+
+						
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="static/assets/js/jquery.min.js"></script>
+			<script src="static/assets/js/jquery.scrollex.min.js"></script>
+			<script src="static/assets/js/jquery.scrolly.min.js"></script>
+			<script src="static/assets/js/browser.min.js"></script>
+			<script src="static/assets/js/breakpoints.min.js"></script>
+			<script src="static/assets/js/util.js"></script>
+			<script src="static/assets/js/main.js"></script>
+
+	</body>
+</html>

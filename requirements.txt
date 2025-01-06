@@ -1,0 +1,5 @@
+Flask>=2.0.0
+Flask-Bootstrap5>=1.1.0
+Flask-WTF>=1.0.0
+WTForms>=3.0.0
+gunicorn
