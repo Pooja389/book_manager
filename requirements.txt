@@ -1,5 +1,5 @@
-Flask>=2.0.0
-Flask-Bootstrap5>=1.1.0
-Flask-WTF>=1.0.0
-WTForms>=3.0.0
+Bootstrap_Flask==2.2.0
+WTForms==3.0.1
+Flask_WTF==1.2.1
+Werkzeug==3.0.0
 gunicorn
